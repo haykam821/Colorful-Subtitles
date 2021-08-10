@@ -1,0 +1,23 @@
+{
+	"schemaVersion": 1,
+	"id": "colorfulsubtitles",
+	"version": "${version}",
+	"name": "Colorful Subtitles",
+	"description": "Changes the color of subtitles based on their sound category.",
+	"authors": [
+		"haykam821"
+	],
+	"contact": {
+		"homepage": "https://github.com/haykam821/Colorful-Subtitles#readme",
+		"issues": "https://github.com/haykam821/Colorful-Subtitles/issues"
+	},
+	"environment": "client",
+	"mixins": [
+		"colorfulsubtitles.mixin.json"
+	],
+	"license": "MIT",
+	"icon": "assets/colorfulsubtitles/icon.png",
+	"depends": {
+		"fabricloader": ">=0.4.0"
+	}
+}

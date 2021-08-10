@@ -1,0 +1,12 @@
+{
+	"required": true,
+	"package": "io.github.haykam821.colorfulsubtitles.mixin",
+	"compatibilityLevel": "JAVA_8",
+	"client": [
+		"SubtitleEntryMixin",
+		"SubtitlesHudMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}
