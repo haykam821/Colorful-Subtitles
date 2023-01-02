@@ -33,7 +33,7 @@ public class SubtitlesHudMixin {
 		return this.iterationEntry = (ColorHolder) iterator.next();
 	}
 
-	@ModifyArg(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/font/TextRenderer;draw(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/text/Text;FFI)I"), index = 4)
+	@ModifyArg(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/SubtitlesHud;drawTextWithShadow(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/text/Text;III)V"), index = 5)
 	private int modifyDrawColor(int color) {
 		return MathHelper.multiplyColors(color, this.iterationEntry.getColor());
 	}
