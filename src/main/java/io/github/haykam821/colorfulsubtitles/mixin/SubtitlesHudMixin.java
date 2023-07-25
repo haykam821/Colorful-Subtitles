@@ -3,6 +3,7 @@ package io.github.haykam821.colorfulsubtitles.mixin;
 import java.util.Iterator;
 import java.util.List;
 
+import net.minecraft.util.math.ColorHelper;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -32,9 +33,9 @@ public class SubtitlesHudMixin {
 		return this.iterationEntry = (ColorHolder) iterator.next();
 	}
 
-	@ModifyArg(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/SubtitlesHud;drawTextWithShadow(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/text/Text;III)V"), index = 5)
+	@ModifyArg(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;drawTextWithShadow(Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/text/Text;III)I"), index = 4)
 	private int modifyDrawColor(int color) {
-		return multiplyColors(color, this.iterationEntry.getColor());
+		return ColorHelper.Argb.mixColor(color, this.iterationEntry.getColor());
 	}
 
 	@Inject(method = "onSoundPlayed", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/SubtitlesHud$SubtitleEntry;reset(Lnet/minecraft/util/math/Vec3d;)V"), locals = LocalCapture.CAPTURE_FAILHARD)
@@ -46,19 +47,6 @@ public class SubtitlesHudMixin {
 	private boolean setColor(List<Object> entries, Object entry, SoundInstance sound, WeightedSoundSet soundSet) {
 		((ColorHolder) entry).setColor(sound);
 		return entries.add(entry);
-	}
-
-	private static int multiplyColors(int a, int b) {
-		int i = (a & 16711680) >> 16;
-		int j = (b & 16711680) >> 16;
-		int k = (a & '\uff00') >> 8;
-		int l = (b & '\uff00') >> 8;
-		int m = (a & 255) >> 0;
-		int n = (b & 255) >> 0;
-		int o = (int)((float)i * (float)j / 255.0F);
-		int p = (int)((float)k * (float)l / 255.0F);
-		int q = (int)((float)m * (float)n / 255.0F);
-		return a & -16777216 | o << 16 | p << 8 | q;
 	}
 
 }
