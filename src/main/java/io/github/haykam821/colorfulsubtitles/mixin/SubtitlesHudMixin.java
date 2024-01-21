@@ -20,7 +20,7 @@ import net.minecraft.client.gui.hud.SubtitlesHud.SubtitleEntry;
 import net.minecraft.client.sound.SoundInstance;
 import net.minecraft.client.sound.WeightedSoundSet;
 import net.minecraft.text.Text;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.ColorHelper;
 
 @Mixin(SubtitlesHud.class)
 @Environment(EnvType.CLIENT)
@@ -35,7 +35,7 @@ public class SubtitlesHudMixin {
 
 	@ModifyArg(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/SubtitlesHud;drawTextWithShadow(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/text/Text;III)V"), index = 5)
 	private int modifyDrawColor(int color) {
-		return MathHelper.multiplyColors(color, this.iterationEntry.getColor());
+		return ColorHelper.Argb.mixColor(color, this.iterationEntry.getColor());
 	}
 
 	@Inject(method = "onSoundPlayed", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/SubtitlesHud$SubtitleEntry;reset(Lnet/minecraft/util/math/Vec3d;)V"), locals = LocalCapture.CAPTURE_FAILHARD)

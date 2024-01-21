@@ -39,6 +39,6 @@ public final class ColorfulSubtitlesCodecs {
 			}
 		}
 
-		return DataResult.error("Unknown sound category '" + name + "'");
+		return DataResult.error(() -> "Unknown sound category '" + name + "'");
 	}
 }
