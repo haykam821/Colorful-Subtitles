@@ -9,7 +9,8 @@
 	],
 	"contact": {
 		"homepage": "https://github.com/haykam821/Colorful-Subtitles#readme",
-		"issues": "https://github.com/haykam821/Colorful-Subtitles/issues"
+		"issues": "https://github.com/haykam821/Colorful-Subtitles/issues",
+		"sources": "https://github.com/haykam821/Colorful-Subtitles"
 	},
 	"environment": "client",
 	"mixins": [
