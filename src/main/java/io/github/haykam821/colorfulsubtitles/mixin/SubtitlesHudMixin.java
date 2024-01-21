@@ -34,8 +34,21 @@ public class SubtitlesHudMixin {
 	}
 
 	@ModifyArg(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/SubtitlesHud;drawTextWithShadow(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/text/Text;III)V"), index = 5)
-	private int modifyDrawColor(int color) {
-		return ColorHelper.Argb.mixColor(color, this.iterationEntry.getColor());
+	private int modifyTextDrawColor(int color) {
+		return ColorHelper.Argb.mixColor(color, this.iterationEntry.getTextColor());
+	}
+
+	@ModifyArg(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/SubtitlesHud;fill(Lnet/minecraft/client/util/math/MatrixStack;IIIII)V"), index = 5)
+	private int modifyBackgroundDrawColor(int color) {
+		int backgroundColor = this.iterationEntry.getBackgroundColor();
+
+		// Use vanilla background color
+		if (backgroundColor < 0) {
+			return color;
+		}
+
+		// Use custom color with vanilla opacity
+		return color | backgroundColor;
 	}
 
 	@Inject(method = "onSoundPlayed", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/SubtitlesHud$SubtitleEntry;reset(Lnet/minecraft/util/math/Vec3d;)V"), locals = LocalCapture.CAPTURE_FAILHARD)

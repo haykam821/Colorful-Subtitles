@@ -12,15 +12,28 @@ import net.minecraft.client.gui.hud.SubtitlesHud;
 @Environment(EnvType.CLIENT)
 public class SubtitleEntryMixin implements ColorHolder {
 	@Unique
-	private int color = 0;
+	private int textColor = 0;
+
+	@Unique
+	private int backgroundColor = -1;
 
 	@Override
-	public int getColor() {
-		return this.color;
+	public int getTextColor() {
+		return this.textColor;
 	}
 
 	@Override
-	public void setColor(int color) {
-		this.color = color;
+	public void setTextColor(int color) {
+		this.textColor = color;
+	}
+
+	@Override
+	public int getBackgroundColor() {
+		return this.backgroundColor;
+	}
+
+	@Override
+	public void setBackgroundColor(int color) {
+		this.backgroundColor = color;
 	}
 }

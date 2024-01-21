@@ -10,7 +10,6 @@ import com.mojang.serialization.DynamicOps;
 import com.mojang.serialization.Keyable;
 
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.text.TextColor;
 
 public final class ColorfulSubtitlesCodecs {
 	private static final SoundCategory[] SOUND_CATEGORIES = SoundCategory.values();
@@ -26,7 +25,7 @@ public final class ColorfulSubtitlesCodecs {
 		}
 	};
 
-	protected static final Codec<Map<SoundCategory, TextColor>> SOUND_CATEGORY_TO_TEXT_COLOR = Codec.simpleMap(SOUND_CATEGORY, TextColor.CODEC, SOUND_CATEGORY_KEYS).codec();
+	protected static final Codec<Map<SoundCategory, SubtitleColor>> SOUND_CATEGORY_TO_SUBTITLE_COLOR = Codec.simpleMap(SOUND_CATEGORY, SubtitleColor.CODEC, SOUND_CATEGORY_KEYS).codec();
 
 	private ColorfulSubtitlesCodecs() {
 		return;
