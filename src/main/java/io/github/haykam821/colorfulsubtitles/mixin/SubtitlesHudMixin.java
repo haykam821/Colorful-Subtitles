@@ -28,7 +28,7 @@ public class SubtitlesHudMixin {
 	@Unique
 	private ColorHolder iterationEntry;
 
-	@Redirect(method = "render", at = @At(value = "INVOKE", target = "Ljava/util/Iterator;next()Ljava/lang/Object;", ordinal = 1))
+	@Redirect(method = "render", at = @At(value = "INVOKE", target = "Ljava/util/Iterator;next()Ljava/lang/Object;", ordinal = 2))
 	private Object updateIterationEntry(Iterator<Object> iterator) {
 		return this.iterationEntry = (ColorHolder) iterator.next();
 	}
@@ -52,7 +52,7 @@ public class SubtitlesHudMixin {
 	}
 
 	@Inject(method = "onSoundPlayed", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/SubtitlesHud$SubtitleEntry;reset(Lnet/minecraft/util/math/Vec3d;)V"), locals = LocalCapture.CAPTURE_FAILHARD)
-	private void resetColor(SoundInstance sound, WeightedSoundSet soundSet, CallbackInfo ci, Text text, Iterator<SubtitleEntry> iterator, SubtitleEntry entry) {
+	private void resetColor(SoundInstance sound, WeightedSoundSet soundSet, float range, CallbackInfo ci, Text text, Iterator<SubtitleEntry> iterator, SubtitleEntry entry) {
 		((ColorHolder) entry).setColor(sound);
 	}
 
