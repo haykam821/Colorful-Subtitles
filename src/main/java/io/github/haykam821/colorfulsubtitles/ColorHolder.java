@@ -10,13 +10,13 @@ import net.minecraft.util.math.ColorHelper;
 
 @Environment(EnvType.CLIENT)
 public interface ColorHolder {
-	public int getTextColor();
-	public void setTextColor(int color);
+	int getTextColor();
+	void setTextColor(int color);
 
-	public int getBackgroundColor();
-	public void setBackgroundColor(int color);
+	int getBackgroundColor();
+	void setBackgroundColor(int color);
 
-	public default void setColor(SoundInstance sound) {
+	default void setColor(SoundInstance sound) {
 		ColorfulSubtitlesConfig config = ColorfulSubtitles.getConfig();
 		SubtitleColor color = config.getColorForCategory(sound.getCategory());
 
