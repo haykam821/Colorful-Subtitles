@@ -12,12 +12,10 @@ import net.minecraft.util.Formatting;
 public class SubtitleColor {
 	protected static final SubtitleColor DEFAULT = SubtitleColor.ofText(TextColor.fromRgb(0xFFFFFF));
 
-	private static final Codec<SubtitleColor> RECORD_CODEC = RecordCodecBuilder.create(instance -> {
-		return instance.group(
-			TextColor.CODEC.fieldOf("text").forGetter(color -> color.text),
-			TextColor.CODEC.optionalFieldOf("background").forGetter(color -> color.background)
-		).apply(instance, SubtitleColor::new);
-	});
+	private static final Codec<SubtitleColor> RECORD_CODEC = RecordCodecBuilder.create(instance -> instance.group(
+        TextColor.CODEC.fieldOf("text").forGetter(color -> color.text),
+        TextColor.CODEC.optionalFieldOf("background").forGetter(color -> color.background)
+    ).apply(instance, SubtitleColor::new));
 
 	private static final Codec<SubtitleColor> SIMPLE_CODEC = TextColor.CODEC.xmap(SubtitleColor::ofText, color -> color.text);
 
